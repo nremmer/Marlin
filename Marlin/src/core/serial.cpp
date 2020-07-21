@@ -21,14 +21,14 @@
  */
 
 #include "serial.h"
-#include "../inc/MarlinConfig.h"
+#include "language.h"
 
 uint8_t marlin_debug_flags = MARLIN_DEBUG_NONE;
 
-static PGMSTR(errormagic, "Error:");
-static PGMSTR(echomagic, "echo:");
+static const char errormagic[] PROGMEM = "Error:";
+static const char echomagic[]  PROGMEM = "echo:";
 
-#if HAS_MULTI_SERIAL
+#if NUM_SERIAL > 1
   int8_t serial_port_index = 0;
 #endif
 
@@ -42,8 +42,8 @@ void serial_echopair_PGM(PGM_P const s_P, const char *v)   { serialprintPGM(s_P)
 void serial_echopair_PGM(PGM_P const s_P, char v)          { serialprintPGM(s_P); SERIAL_CHAR(v); }
 void serial_echopair_PGM(PGM_P const s_P, int v)           { serialprintPGM(s_P); SERIAL_ECHO(v); }
 void serial_echopair_PGM(PGM_P const s_P, long v)          { serialprintPGM(s_P); SERIAL_ECHO(v); }
-void serial_echopair_PGM(PGM_P const s_P, float v)         { serialprintPGM(s_P); SERIAL_DECIMAL(v); }
-void serial_echopair_PGM(PGM_P const s_P, double v)        { serialprintPGM(s_P); SERIAL_DECIMAL(v); }
+void serial_echopair_PGM(PGM_P const s_P, float v)         { serialprintPGM(s_P); SERIAL_ECHO(v); }
+void serial_echopair_PGM(PGM_P const s_P, double v)        { serialprintPGM(s_P); SERIAL_ECHO(v); }
 void serial_echopair_PGM(PGM_P const s_P, unsigned int v)  { serialprintPGM(s_P); SERIAL_ECHO(v); }
 void serial_echopair_PGM(PGM_P const s_P, unsigned long v) { serialprintPGM(s_P); SERIAL_ECHO(v); }
 
